@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 public class MyPanel extends JPanel {
 
 	
-	//ZMIANA!!!
+	//ZMIANA!!! druga!
 	
 	private int width, height;
 	private Game game;
