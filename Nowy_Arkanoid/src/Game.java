@@ -68,9 +68,23 @@ public class Game extends Thread {
 
 	public void addBall(){
 		if(lives != 0){
-			this.setBall(new Ball(paddle.getX()+30,paddle.getY()-10));
+			this.setBall(new Ball());
 			exec.execute(ball);
-			
+			ball.setX(paddle.getX()+(int)((double)paddle.getWidth()/2));
+			this.stickOn(paddle.getX());
+		}
+	}
+	
+	public void stickOn(int paddleX){
+		ball.stopBall();
+		ball.setStick(true);
+		ball.setPaddleX(paddleX);
+	}
+	
+	public void stickOff(){
+		if(ball.isPause()){
+			ball.pause();
+			ball.setStick(false);
 		}
 	}
 

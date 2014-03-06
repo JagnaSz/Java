@@ -8,8 +8,8 @@ public class Ball implements Runnable {
 	private boolean start;
 	private boolean pause;
 	private boolean stick;
-
-
+	private int paddleX;
+//	private boolean stop;
 	
 	public boolean isPause() {
 		return pause;
@@ -96,6 +96,21 @@ public class Ball implements Runnable {
 		}
 		
 	}
+	
+	public void stopBall(){
+		if(!start){
+			pVx = vx;
+			pVy = vy;
+			vx = 0;
+			vy = 0;
+			start = false;	
+		}
+		else{
+			vx = pVx;
+			vy = pVy;
+			start = true;
+		}
+	}
 	@Override
 	public void run() {
 		
@@ -115,6 +130,12 @@ public class Ball implements Runnable {
 	}
 	public void setStick(boolean stick) {
 		this.stick = stick;
+	}
+	public int getPaddleX() {
+		return paddleX;
+	}
+	public void setPaddleX(int paddleX) {
+		this.paddleX = paddleX;
 	}
 	
 }

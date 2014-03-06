@@ -21,7 +21,6 @@ public class MyFrame extends JFrame implements ActionListener, KeyListener, Mous
 	private Ball ball;
 	private Timer timer;
 	private Game game;
-	private boolean pressed;
 	private int key;
 	private boolean is_game = true;
 	
@@ -55,9 +54,7 @@ public class MyFrame extends JFrame implements ActionListener, KeyListener, Mous
 
 	}
 
-	public void cos(){
-		
-	}
+
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		
@@ -70,11 +67,7 @@ public class MyFrame extends JFrame implements ActionListener, KeyListener, Mous
 			//poruszanie paletk¹ i odbicia pi³ki
 			int mousePoint = MouseInfo.getPointerInfo().getLocation().x ;
 			p.setX(mousePoint - (p.getWidth()/2));
-			if (b.isStick()) {
-				b.setX( p.getX() + p.getWidth()/2 );
 
-			} else 
-			{
 				//odbicia od œcian
 				if(b.getX() + b.getVx() <= panel.getLeft()){
 					b.setVx(-b.getVx());
@@ -89,53 +82,58 @@ public class MyFrame extends JFrame implements ActionListener, KeyListener, Mous
 				
 				//odbicia pi³ki
 				if((b.getY()+b.getD() + b.getVy() >= p.getY()) && b.getX()+(int)(b.getD()/2)>=p.getX() && b.getX()+(int)(b.getD()/2)<=p.getX()+p.getWidth() && b.getY()+b.getD() <= p.getY()+p.getHeight() ){
-					if(b.getX()+b.getD()>= p.getX() && b.getX()+b.getD()<= p.getX()+(int)(0.2*p.getWidth())){
-						if(b.getVx()>0){
-							b.setVx(-b.getVx()-2);
-							b.setVy(-b.getVy());
-						}
-						else{
-							b.setVx(b.getVx()-2);
-							b.setVy(-b.getVy());
-						}
+					if(b.isStick()){
+						b.setX(p.getX() - b.getPaddleX() + b.getX());
+						b.setPaddleX(p.getX());
 					}
-					else if(b.getX()+b.getD()> p.getX()+(int)(0.2*p.getWidth()) && b.getX()+b.getD()<= p.getX()+(int)(0.4*p.getWidth()) ){
-						if(b.getVx()>0){
-							b.setVx(-b.getVx()+1); //-2
-							b.setVy(-b.getVy());
+					else { 
+						if(b.getX()+b.getD()>= p.getX() && b.getX()+b.getD()<= p.getX()+(int)(0.2*p.getWidth())){
+							if(b.getVx()>0){
+								b.setVx(-b.getVx()-2);
+								b.setVy(-b.getVy());
+							}
+							else{
+								b.setVx(b.getVx()-2);
+								b.setVy(-b.getVy());
+							}
 						}
-						else{
-							b.setVx(b.getVx()-1);  //2
-							b.setVy(-b.getVy());
+						else if(b.getX()+b.getD()> p.getX()+(int)(0.2*p.getWidth()) && b.getX()+b.getD()<= p.getX()+(int)(0.4*p.getWidth()) ){
+							if(b.getVx()>0){
+								b.setVx(-b.getVx()+1); //-2
+								b.setVy(-b.getVy());
+							}
+							else{
+								b.setVx(b.getVx()-1);  //2
+								b.setVy(-b.getVy());
+							}
 						}
-					}
-					else if(b.getX()+b.getD()> p.getX()+(int)(0.4*p.getWidth()) && b.getX()+b.getD()<= p.getX()+(int)(0.6*p.getWidth()) ){
-						
+						else if(b.getX()+b.getD()> p.getX()+(int)(0.4*p.getWidth()) && b.getX()+b.getD()<= p.getX()+(int)(0.6*p.getWidth()) ){
 							
-							b.setVy(-b.getVy());
-						
+								
+								b.setVy(-b.getVy());
+							
+						}
+						else if(b.getX()+b.getD()> p.getX()+(int)(0.6*p.getWidth()) && b.getX()+b.getD()<= p.getX()+(int)(0.8*p.getWidth()) ){
+							if(b.getVx()>0){
+								b.setVx(b.getVx()-1); //1
+								b.setVy(-b.getVy());
+							}
+							else{
+								b.setVx(-b.getVx()+1);  //-1
+								b.setVy(-b.getVy());
+							}
+						}
+						else if(b.getX()+b.getD()> p.getX()+(int)(0.8*p.getWidth()) && b.getX()+b.getD()<= p.getX()+p.getWidth() ){
+							if(b.getVx()>0){
+								b.setVx(b.getVx()+2);
+								b.setVy(-b.getVy());
+							}
+							else{
+								b.setVx(-b.getVx()+2);
+								b.setVy(-b.getVy());
+							}
+						}
 					}
-					else if(b.getX()+b.getD()> p.getX()+(int)(0.6*p.getWidth()) && b.getX()+b.getD()<= p.getX()+(int)(0.8*p.getWidth()) ){
-						if(b.getVx()>0){
-							b.setVx(b.getVx()-1); //1
-							b.setVy(-b.getVy());
-						}
-						else{
-							b.setVx(-b.getVx()+1);  //-1
-							b.setVy(-b.getVy());
-						}
-					}
-					else if(b.getX()+b.getD()> p.getX()+(int)(0.8*p.getWidth()) && b.getX()+b.getD()<= p.getX()+p.getWidth() ){
-						if(b.getVx()>0){
-							b.setVx(b.getVx()+2);
-							b.setVy(-b.getVy());
-						}
-						else{
-							b.setVx(-b.getVx()+2);
-							b.setVy(-b.getVy());
-						}
-					}
-					
 				}
 				
 				//zbijanie bloczków
@@ -206,7 +204,7 @@ public class MyFrame extends JFrame implements ActionListener, KeyListener, Mous
 						
 					}
 				}
-			}
+			
 		}
 			panel.repaint();
 	
@@ -214,7 +212,7 @@ public class MyFrame extends JFrame implements ActionListener, KeyListener, Mous
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		pressed = true;
+		
 		key = e.getKeyChar();
 		
 		if(key == 'p'){
@@ -225,7 +223,7 @@ public class MyFrame extends JFrame implements ActionListener, KeyListener, Mous
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		pressed = false;
+		
 		
 	}
 

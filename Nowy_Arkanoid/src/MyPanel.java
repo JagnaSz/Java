@@ -15,7 +15,6 @@ import javax.swing.JPanel;
 public class MyPanel extends JPanel {
 
 	
-	//ZMIANA!!! druga!
 	
 	private int width, height;
 	private Game game;
@@ -76,29 +75,29 @@ public class MyPanel extends JPanel {
 		
 		
 		//dodanie t³a
-		File imageFile = new File("C:/Users/aga/workspace/Arkanoid/textures/bg.jpg");
-		File imageFile2 = new File("C:/Users/aga/workspace/Arkanoid/textures/raq.jpg");
-		File imageFile3 = new File("C:/Users/aga/workspace/Arkanoid/textures/red_ball.gif");
-		//File imageFile4 = new File("C:/Users/aga/workspace/Arkanoid/textures/dead.gif");
-		File imageFile5 = new File("C:/Users/aga/workspace/Arkanoid/textures/block.jpg");
-		//File imageFile6 = new File("C:/Users/aga/workspace/Arkanoid/textures/block2.jpg");
-		File imageFile7 = new File("C:/Users/aga/workspace/Arkanoid/textures/drop.gif");
-		File n0 = new File("C:/Users/aga/workspace/Arkanoid/textures/numbers/0.png");
-		File n1 = new File("C:/Users/aga/workspace/Arkanoid/textures/numbers/1.png");
-		File n2 = new File("C:/Users/aga/workspace/Arkanoid/textures/numbers/2.png");
-		File n3 = new File("C:/Users/aga/workspace/Arkanoid/textures/numbers/3.png");
-		File n4 = new File("C:/Users/aga/workspace/Arkanoid/textures/numbers/4.png");
-		File n5 = new File("C:/Users/aga/workspace/Arkanoid/textures/numbers/5.png");
-		File n6 = new File("C:/Users/aga/workspace/Arkanoid/textures/numbers/6.png");
-		File n7 = new File("C:/Users/aga/workspace/Arkanoid/textures/numbers/7.png");
-		File n8 = new File("C:/Users/aga/workspace/Arkanoid/textures/numbers/8.png");
-		File n9 = new File("C:/Users/aga/workspace/Arkanoid/textures/numbers/9.png");
-		File boardSc = new File("C:/Users/aga/workspace/Arkanoid/textures/numbers/board.jpg");
-		File all = new File("C:/Users/aga/workspace/Arkanoid/textures/allBg.jpg");
-		File p = new File("C:/Users/aga/workspace/Arkanoid/textures/panel.jpg");
-		File sc = new File("C:/Users/aga/workspace/Arkanoid/textures/scores.gif");
-		File live = new File("C:/Users/aga/workspace/Arkanoid/textures/lives.gif");
-		File pause_ = new File("C:/Users/aga/workspace/Arkanoid/textures/pause.gif");
+		File imageFile = new File("C:/Users/aga/Documents/GitHub/Java/Nowy_Arkanoid/textures/bg.jpg");
+		File imageFile2 = new File("C:/Users/aga/Documents/GitHub/Java/Nowy_Arkanoid/textures/raq.jpg");
+		File imageFile3 = new File("C:/Users/aga/Documents/GitHub/Java/Nowy_Arkanoid/textures/red_ball.gif");
+		//File imageFile4 = new File("C:/Users/aga/Documents/GitHub/Java/Nowy_Arkanoid/textures/dead.gif");
+		File imageFile5 = new File("C:/Users/aga/Documents/GitHub/Java/Nowy_Arkanoid/textures/block.jpg");
+		//File imageFile6 = new File("C:/Users/aga/Documents/GitHub/Java/Nowy_Arkanoid/textures/block2.jpg");
+		File imageFile7 = new File("C:/Users/aga/Documents/GitHub/Java/Nowy_Arkanoid/textures/drop.gif");
+		File n0 = new File("C:/Users/aga/Documents/GitHub/Java/Nowy_Arkanoid/textures/numbers/0.png");
+		File n1 = new File("C:/Users/aga/Documents/GitHub/Java/Nowy_Arkanoid/textures/numbers/1.png");
+		File n2 = new File("C:/Users/aga/Documents/GitHub/Java/Nowy_Arkanoid/textures/numbers/2.png");
+		File n3 = new File("C:/Users/aga/Documents/GitHub/Java/Nowy_Arkanoid/textures/numbers/3.png");
+		File n4 = new File("C:/Users/aga/Documents/GitHub/Java/Nowy_Arkanoid/textures/numbers/4.png");
+		File n5 = new File("C:/Users/aga/Documents/GitHub/Java/Nowy_Arkanoid/textures/numbers/5.png");
+		File n6 = new File("C:/Users/aga/Documents/GitHub/Java/Nowy_Arkanoid/textures/numbers/6.png");
+		File n7 = new File("C:/Users/aga/Documents/GitHub/Java/Nowy_Arkanoid/textures/numbers/7.png");
+		File n8 = new File("C:/Users/aga/Documents/GitHub/Java/Nowy_Arkanoid/textures/numbers/8.png");
+		File n9 = new File("C:/Users/aga/Documents/GitHub/Java/Nowy_Arkanoid/textures/numbers/9.png");
+		File boardSc = new File("C:/Users/aga/Documents/GitHub/Java/Nowy_Arkanoid/textures/numbers/board.jpg");
+		File all = new File("C:/Users/aga/Documents/GitHub/Java/Nowy_Arkanoid/textures/allBg.jpg");
+		File p = new File("C:/Users/aga/Documents/GitHub/Java/Nowy_Arkanoid/textures/panel.jpg");
+		File sc = new File("C:/Users/aga/Documents/GitHub/Java/Nowy_Arkanoid/textures/scores.gif");
+		File live = new File("C:/Users/aga/Documents/GitHub/Java/Nowy_Arkanoid/textures/lives.gif");
+		File pause_ = new File("C:/Users/aga/Documents/GitHub/Java/Nowy_Arkanoid/textures/pause.gif");
 		try {
             BGimage = ImageIO.read(imageFile);
             paddleImage = ImageIO.read(imageFile2);
