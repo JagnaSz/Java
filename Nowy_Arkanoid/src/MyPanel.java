@@ -14,8 +14,8 @@ import javax.swing.JPanel;
 
 public class MyPanel extends JPanel {
 
-	
-	
+
+
 	private int width, height;
 	private Game game;
 	private int top, right, bottom, left;
@@ -30,8 +30,8 @@ public class MyPanel extends JPanel {
 	private BufferedImage boardScores;
 	private String strScore;
 	private String strLives;
-	private BufferedImage allBg, panel, scores,lives,pause;
-	
+	private BufferedImage allBg, panel, scores,lives,pause, gameOver;
+
 	public int getTop() {
 		return top;
 	}
@@ -55,7 +55,7 @@ public class MyPanel extends JPanel {
 	public void setLeft(int left) {
 		this.left = left;
 	}
-	
+
 	public int getBottom() {
 		return bottom;
 	}
@@ -72,9 +72,9 @@ public class MyPanel extends JPanel {
 		bottom = top + (int)(0.8*height);
 		right = left + (int)(0.8*width);
 		game = new Game(left, right);
-		
-		
-		//dodanie t≥a
+
+
+		//dodanie t¬≥a
 		File imageFile = new File("C:/Users/aga/Documents/GitHub/Java/Nowy_Arkanoid/textures/bg.jpg");
 		File imageFile2 = new File("C:/Users/aga/Documents/GitHub/Java/Nowy_Arkanoid/textures/raq.jpg");
 		File imageFile3 = new File("C:/Users/aga/Documents/GitHub/Java/Nowy_Arkanoid/textures/red_ball.gif");
@@ -98,6 +98,7 @@ public class MyPanel extends JPanel {
 		File sc = new File("C:/Users/aga/Documents/GitHub/Java/Nowy_Arkanoid/textures/scores.gif");
 		File live = new File("C:/Users/aga/Documents/GitHub/Java/Nowy_Arkanoid/textures/lives.gif");
 		File pause_ = new File("C:/Users/aga/Documents/GitHub/Java/Nowy_Arkanoid/textures/pause.gif");
+		File game_over = new File("C:/Users/aga/Documents/GitHub/Java/Nowy_Arkanoid/textures/gameover.gif");
 		try {
             BGimage = ImageIO.read(imageFile);
             paddleImage = ImageIO.read(imageFile2);
@@ -122,6 +123,7 @@ public class MyPanel extends JPanel {
             scores = ImageIO.read(sc);
             lives = ImageIO.read(live);
             pause = ImageIO.read(pause_);
+            gameOver = ImageIO.read(game_over);
             
             
         } catch (IOException e) {
@@ -130,51 +132,51 @@ public class MyPanel extends JPanel {
         }
 
 	}
-	
+
 	public void paint(Graphics g){
-		
+
 		Paddle paddle = game.getPaddle();
 		Ball ball = game.getBall();
-		
-		//malowanie t≥a
+
+		//malowanie t≈Ça
 		g.drawImage(allBg, 0,0,width,height,null);
 		g.drawImage(BGimage,left,top,null);
-	        
-	
-		//malowanie pi≥ki
-		if(game.getBall().isStart()){
+
+
+		//malowanie pi≈Çki
 			g.drawImage(ballImage,ball.getX(), ball.getY(), ball.getD(), ball.getD(), null);
-		}
+		
+			
 		//malowanie paletki
 		g.drawImage(paddleImage, paddle.getX(), paddle.getY(), paddle.getWidth(), paddle.getHeight() , null);
-		
 
-		
+
+
 		//malowanie dropa
 				LinkedList<Drop> dr = game.getList_drops();
 				for(int i=0; i<dr.size();i++){
-					
+
 					g.drawImage(dropImage,dr.get(i).getX(), dr.get(i).getY(), dr.get(i).getWidth(), dr.get(i).getHeight(), null);
 				}
-				
-		//malowanie bloczkÛw
+
+		//malowanie bloczk√≥w
 		LinkedList<Block> bl = game.getList_blocks();
-		
+
 		for(int i=0; i< bl.size();i++){
 			if(bl.get(i).isVisible()){
 				g.drawImage(blockImage,bl.get(i).getX(), bl.get(i).getY(), bl.get(i).getWidth(),bl.get(i).getHeight(),null);
 			//	g.drawImage(blockImage2,bl.get(i).getX(), bl.get(i).getY(), bl.get(i).getWidth(),bl.get(i).getHeight(),null);
 			}
 		}
-		
-		
+
+
 		g.drawImage(panel, 1130, top, null);
-		
-		
+
+
 		//malowanie scores
 		g.drawImage(scores, 1185, top+30, 90, 20, null);
 		g.drawImage(boardScores, 1135, top+60, 190, 70, null);
-	
+
 		strScore = Integer.toString(game.getScore());
 		while (strScore.length() < 8)
 			strScore = "0" + strScore;
@@ -214,12 +216,12 @@ public class MyPanel extends JPanel {
 
 			}		
 		}
-		
-		
+
+
 		//malowanie lives
 		g.drawImage(lives, 1196, top+200, 70, 17, null);
 		g.drawImage(boardScores, 1190, top+225, 80, 45, null);
-		
+
 		strLives = Integer.toString(game.getLives());
 		while(strLives.length() < 2){
 			strLives = "0" + strLives;
@@ -261,7 +263,7 @@ public class MyPanel extends JPanel {
 
 			}		
 		}
-		
+
 		//gdy pauza
 		if(game.getBall().isPause() == true){
 			((Graphics2D) g).setComposite(AlphaComposite.SrcOver.derive(0.65f));
@@ -269,12 +271,19 @@ public class MyPanel extends JPanel {
 			g.fillRect(left, top, right, bottom-top);
 			g.drawImage(pause, (int)((left+right)/2)-65, (int)((bottom-2*top)/2)+20, 150, 60, null);
 		}
+		
+		//gdy koniec gry
+		if(game.getLives() == 0){
+			g.drawImage(allBg, 0,0,width,height,null);
+			g.drawImage(gameOver, width/2-300, 70, null);
+			
+		}
 	}
-	
+
 	public Game getGame(){
 		return game;
 	}
-	
 
-	
+
+
 }

@@ -4,24 +4,24 @@ import java.util.concurrent.TimeUnit;
 public class Ball implements Runnable {
 
 	private int d,vx,vy,x,y;
-	private int pVx, pVy;    //prêdkoœci przed pauz¹
+	private int pVx, pVy;    //prÃªdkoÅ“ci przed pauzÂ¹
 	private boolean start;
 	private boolean pause;
 	private boolean stick;
 	private int paddleX;
-//	private boolean stop;
-	
+	private boolean stop;
+
 	public boolean isPause() {
 		return pause;
 	}
-	public boolean isStart() {
-		return start;
+	public boolean isStoped() {
+		return stop;
 	}
-	public void setStart(boolean start) {
-		this.start = start;
+	public void setStop(boolean stop) {
+		this.stop = stop;
 	}
 	public Ball(){
-		start =  true;
+		stop =  false;
 		d = 10;
 		vx = 2;   //-2
 		vy =-2;  //-2
@@ -30,9 +30,9 @@ public class Ball implements Runnable {
 		pause = false;
 		setStick(false);
 	}
-	
+
 	public Ball(int _x, int _y){
-		start =  true;
+		stop =  false;
 		d = 10;
 		vx = 2;   //-2
 		vy =-2;  //-2
@@ -80,7 +80,7 @@ public class Ball implements Runnable {
 	public void setD(int d) {
 		this.d = d;
 	}
-	
+
 	public void pause(){
 		if(!pause){
 			pVx = vx;
@@ -94,26 +94,26 @@ public class Ball implements Runnable {
 			vy = pVy;
 			pause = false;
 		}
-		
+
 	}
-	
+
 	public void stopBall(){
-		if(!start){
+		if(!stop){
 			pVx = vx;
 			pVy = vy;
 			vx = 0;
 			vy = 0;
-			start = false;	
+			stop = true;	
 		}
 		else{
 			vx = pVx;
 			vy = pVy;
-			start = true;
+			stop = false;
 		}
 	}
 	@Override
 	public void run() {
-		
+
 		while(true){
 			try {
 				TimeUnit.MILLISECONDS.sleep(20);
@@ -123,7 +123,7 @@ public class Ball implements Runnable {
 			x = x+vx;
 			y = y+vy;
 		}
-		
+
 	}
 	public boolean isStick() {
 		return stick;
@@ -137,5 +137,5 @@ public class Ball implements Runnable {
 	public void setPaddleX(int paddleX) {
 		this.paddleX = paddleX;
 	}
-	
+
 }

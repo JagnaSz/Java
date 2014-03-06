@@ -13,10 +13,10 @@ public class Game extends Thread {
 	private LinkedList<Block> list_blocks;
 	private LinkedList<Drop> list_drops;
 	private LinkedList<Block> list_wsplBlock;
-	
+
 	private int score;
 	private int lives;
-	
+
 	public Game(){
 		score = 0;
 		lives = 3;
@@ -26,11 +26,11 @@ public class Game extends Thread {
 		setList_blocks(new LinkedList<Block>());
 		setList_drops(new LinkedList<Drop>());
 		setList_wsplBlock(new LinkedList<Block>());
-		
-		
+
+
 		exec = Executors.newCachedThreadPool();
 		exec.execute(ball);
-		
+
 	}
 
 	public Game(int left, int right) {
@@ -42,48 +42,48 @@ public class Game extends Thread {
 		setList_blocks(new LinkedList<Block>());
 		setList_drops(new LinkedList<Drop>());
 		setList_wsplBlock(new LinkedList<Block>());
-		
+
 			//list_blocks.add(new Block(150,150));
 		for(int j = 0; j<8; j++){ //8
 			for(int i=0; i<23; i++){ //23
 				list_blocks.add(new Block(38+ blocks.getWidth()*i,80+blocks.getHeight()*j)); //38 80
 			}
 		}
-		
-		
-		//ustalanie wspó³rzêdnych dla dropa
+
+
+		//ustalanie wspÃ³Å‚rzÄ™dnych dla dropa
 		for(int i=0; i<20; i++){
 			list_wsplBlock.add(getRandomX());
 		}
-		
+
 		//dodawanie do listy
 		for(int i=0;i<20;i++){
 			list_drops.add(new Drop(getList_wsplBlock().get(i).getX(),getList_wsplBlock().get(i).getY()));
 		}
-		
+
 		exec = Executors.newCachedThreadPool();
 		exec.execute(ball);
-	
+
 	}
 
 	public void addBall(){
 		if(lives != 0){
 			this.setBall(new Ball());
 			exec.execute(ball);
-			ball.setX(paddle.getX()+(int)((double)paddle.getWidth()/2));
+			ball.setX(paddle.getX()+(int)((double)paddle.getWidth()/2)-5);
 			this.stickOn(paddle.getX());
 		}
 	}
-	
+
 	public void stickOn(int paddleX){
 		ball.stopBall();
 		ball.setStick(true);
 		ball.setPaddleX(paddleX);
 	}
-	
+
 	public void stickOff(){
-		if(ball.isPause()){
-			ball.pause();
+		if(ball.isStoped()){
+			ball.stopBall();
 			ball.setStick(false);
 		}
 	}
@@ -103,16 +103,16 @@ public class Game extends Thread {
 	public void setPaddle(Paddle paddle) {
 		this.paddle = paddle;
 	}
-	
+
 	public void deleteBall(){
-		ball.setStart(false);
-		
+		ball.setStop(true);
+
 	}
-	
+
 
 	public void deleteBlock(int x){
 		for(int i=0; i<list_drops.size();i++){
-			
+
 			if(list_drops.get(i).getX()>=list_blocks.get(x).getX()
 				   &&list_drops.get(i).getX()+list_drops.get(i).getWidth()<=list_blocks.get(x).getX()+list_blocks.get(x).getWidth()
 				   &&list_drops.get(i).getY()>=list_blocks.get(x).getY()
@@ -123,9 +123,9 @@ public class Game extends Thread {
 				}
 		}
 		list_blocks.remove(x);
-		
+
 	}
-	
+
 	public Block getBlocks() {
 		return blocks;
 	}
@@ -133,7 +133,7 @@ public class Game extends Thread {
 	public void setBlocks(Block blocks) {
 		this.blocks = blocks;
 	}
-	
+
 
 	public LinkedList<Block> getList_blocks() {
 		return list_blocks;
@@ -142,7 +142,7 @@ public class Game extends Thread {
 	public void setList_blocks(LinkedList<Block> list_blocks) {
 		this.list_blocks = list_blocks;
 	}
-	
+
 	//pobiera randomowy x bloczka do ustawienia dropa
 	public Block getRandomX(){
 		Random generator = new Random();
@@ -173,12 +173,12 @@ public class Game extends Thread {
 	public void setScore(int score) {
 		this.score = score;
 	}
-	
+
 	public void addScore(int i){
 		score+=i;
 		System.out.println(getScore());
 	}
-	
+
 	public void getBonus(int i){
 		switch(i){
 		case 0:
@@ -192,25 +192,25 @@ public class Game extends Thread {
 		break;
 		case 3:
 			addLive();
-			
+
 		default:
 			System.out.println("Nieznane!");
-			
+
 		}
 	}
-	
+
 	public void lengthen_paddle(){
 		paddle.setWidth(paddle.getWidth()+30);
 		paddle.setX(paddle.getX()-15);
 	}
-	
+
 	public void shorten_paddle(){
 		if(paddle.getWidth() > paddle.getWidth()-25 ){
 			paddle.setWidth(paddle.getWidth()-25);
 			paddle.setX(paddle.getX()+14);
 		}
 	}
-	
+
 	public void pause(){
 		ball.pause();
 	}
@@ -222,14 +222,14 @@ public class Game extends Thread {
 	public void setLives(int lives) {
 		this.lives = lives;
 	}
-	
+
 	public void addLive(){
 		lives++;
 	}
-	
+
 	public void subLive(){
 		lives--;
 	}
-	
+
 
 }
